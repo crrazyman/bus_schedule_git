@@ -1,0 +1,86 @@
+{
+	"buses": [
+		{
+			"name": "302",
+			"stops": [
+				{
+					"station": "Fortuna",
+					"status": "ON-TIME",
+					"arrival": "12:00pm",
+					"departure": "12:02pm"
+				},
+				{
+					"station": "Ghencea",
+					"status": "ON-TIME",
+					"arrival": "1:00pm",
+					"departure": "1:05pm"
+				}
+			]
+		},
+		{
+			"name": "335",
+			"stops": [
+				{
+					"station": "Titan",
+					"status": "ON-TIME",
+					"arrival": "12:00pm",
+					"departure": "12:02pm"
+				},
+				{
+					"station": "Baneasa",
+					"status": "DELAYED",
+					"arrival": "1:00pm",
+					"departure": "1:02pm",
+					"delayedArrival": "1:10pm",
+					"delayedDeparture": "1:17pm"
+				}
+			]
+		},
+		{
+			"name": "330",
+			"stops": [
+				{
+					"station": "Titan",
+					"status": "ON-TIME",
+					"arrival": "12:00pm",
+					"departure": "12:02pm"
+				},
+				{
+					"station": "Piata Presei",
+					"status": "DELAYED",
+					"arrival": "1:00pm",
+					"departure": "1:02pm",
+					"delayedArrival": "1:07pm",
+					"delayedDeparture": "1:17pm"
+				}
+			]
+		},
+		{
+			"name": "101",
+			"stops": [
+				{
+					"station": "Salajan",
+					"status": "ON-TIME",
+					"arrival": "12:00pm",
+					"departure": "12:02pm"
+				},
+				{
+					"station": "Diham",
+					"status": "DELAYED",
+					"arrival": "1:00pm",
+					"departure": "1:02pm",
+					"delayedArrival": "1:07pm",
+					"delayedDeparture": "1:17pm"
+				},
+				{
+					"station": "Obor",
+					"status": "DELAYED",
+					"arrival": "2:00pm",
+					"departure": "2:02pm",
+					"delayedArrival": "2:07pm",
+					"delayedDeparture": "2:17pm"
+				}
+			]
+		}
+	]
+}

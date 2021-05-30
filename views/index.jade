@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Bus Schedule
+  p Select your bus below to see its current schedule.
+  #wrapper
+    #busList
+      h2 Buses
+      #buses.d-flex.flex-row
+    #busInfo
+      strong  <span id='busName'></span>
+      #busSchedule
+        strong Select a bus to view its current schedule.
