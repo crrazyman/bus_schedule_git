@@ -1,0 +1,47 @@
+stages:
+  - install:deps
+  - build:docker
+  - deploy:docker
+
+variables:
+  IMAGE_NAME: certsign
+  REGISTRY_IMAGE: $REGISTRY_URL/test/$IMAGE_NAME
+
+install:
+  image: node:latest
+  stage: install:deps
+  script:
+    - npm install
+  artifacts:
+    expire_in: 1h
+    paths:
+      - node_modules/
+  cache:
+    paths:
+      - node_modules/
+
+build-docker-image:
+  image: docker:latest
+  stage: build:docker
+  services:
+    - docker:dind
+  before_script:
+    - echo "$REGISTRY_PASS" | docker login -u "$REGISTRY_USER" --password-stdin $REGISTRY_URL
+  dependencies:
+    - install
+  script:
+    - docker build -t "$REGISTRY_IMAGE:latest" .
+    - docker push "$REGISTRY_IMAGE:latest"
+
+deploy-docker-image:
+  image: alpine:latest
+  stage: deploy:docker
+  script:
+    - chmod og= $ID_RSA
+    - apk update && apk add openssh-client
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "ker login -u "$REGISTRY_USER" --password-stdin $REGISTRY_URL"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $REGISTRY_IMAGE:latest"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker rm -f cert || true"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -d -P --name cert --rm $REGISTRY_IMAGE:latest"
+
+
